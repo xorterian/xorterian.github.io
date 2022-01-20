@@ -5,16 +5,16 @@
 <title>Xorterian</title>
 </head>
 <body class="b">
-
+<h1 align="center">Wellcome to my xorterian website!</h1>
+<p>Here is the great opportunity to choose your favourite fractal:</p>
 <table align="center">
  <tr>
   <th><canvas id="myCanvas" width="512" height="512" style="border:1px solid #d3d3d3;">
   Your browser does not support the HTML5 canvas tag.</canvas></th>
  </tr>
 </table>
-
+<p align="right"><q><i>Artificem commendat opus.</i></q></p>
 <script>
-
 function xor(x,y) {return ((Math.floor(x)!=x || Math.floor(y)!=y) ? xor(2*x,2*y)/2 : x^y);};
 window.onload = function() {
  var canvas = document.getElementById("myCanvas"); 
@@ -23,12 +23,13 @@ window.onload = function() {
  var height = canvas.height;
  var imagedata = context.createImageData(width, height);
  function createImage(t) {
-  t=Math.floor(t/100)
+  t=Math.floor(t/100);
   for (var x=0; x<width; x++) {
    for (var y=0; y<height; y++) {
     var pixelindex = (y * width + x) * 4;
-    //var R = x^y^(2*x)^(2*y);
-	var R = x^y;
+    var R = x^y^(2*x)^(2*y);
+	//var R = x^y;
+	//var R = eval(F[n]);
 	//var R = Math.floor(Math.sin(x/100)*256)^Math.floor(256*Math.cos(y/100));
 	//var R = Math.floor(Math.sin(x/100)*256)^Math.floor(256*Math.cos(y/100))^Math.floor(2*Math.sin(x/100)*256)^Math.floor(2*256*Math.cos(y/100));
 	//var R = Math.floor((x/400)**2*256)^Math.floor(256*(y/400)**2);
@@ -37,7 +38,7 @@ window.onload = function() {
 	//var R = (x+y)*Math.sin(t/30)+(x&y)*Math.cos(t/30)*.866-(x|y)*Math.cos(t/30)*.866;
 	//var R = (x^y)*Math.sin(t/30)+(x+y)*Math.cos(t/30)*.866-(x-y)*Math.cos(t/30)*.866;
 	//var R = (x&y)*Math.cos(x/10)+(x|y)*Math.cos(y/10);
-	R=(R+t*5)%256;
+	R=(R+t)%256;
     // Set the pixel data
     imagedata.data[pixelindex] = R;     // Red
     imagedata.data[pixelindex+1] = R; // Green
@@ -54,6 +55,5 @@ window.onload = function() {
 main(0);
 };
 </script> 
-
 </body>
 </html>
