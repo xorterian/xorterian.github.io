@@ -38,7 +38,7 @@ window.onload = function() {
 	//var R = (x+y)*Math.sin(t/30)+(x&y)*Math.cos(t/30)*.866-(x|y)*Math.cos(t/30)*.866;
 	//var R = (x^y)*Math.sin(t/30)+(x+y)*Math.cos(t/30)*.866-(x-y)*Math.cos(t/30)*.866;
 	//var R = (x&y)*Math.cos(x/10)+(x|y)*Math.cos(y/10);
-	R=(R+t)%256;
+	R=(R+t*4)%256;
     // Set the pixel data
     imagedata.data[pixelindex] = R;     // Red
     imagedata.data[pixelindex+1] = R; // Green
