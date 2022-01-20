@@ -16,27 +16,19 @@
 <script>
 
 function xor(x,y) {return ((Math.floor(x)!=x || Math.floor(y)!=y) ? xor(2*x,2*y)/2 : x^y);};
-// The function gets called when the window is fully loaded
 window.onload = function() {
- // Get the canvas and context
  var canvas = document.getElementById("myCanvas"); 
  var context = canvas.getContext("2d");
- // Define the image dimensions
  var width = canvas.width;
  var height = canvas.height;
- // Create an ImageData object
  var imagedata = context.createImageData(width, height);
- // Create the image
  function createImage(t) {
   t=Math.floor(t/100)
-  // Loop over all of the pixels
   for (var x=0; x<width; x++) {
    for (var y=0; y<height; y++) {
-    // Get the pixel index
     var pixelindex = (y * width + x) * 4;
-    // Generate a xor pattern with some random noise
-	//var R = x^y^(2*x)^(2*y);
-	//var R = x^y;
+    //var R = x^y^(2*x)^(2*y);
+	var R = x^y;
 	//var R = Math.floor(Math.sin(x/100)*256)^Math.floor(256*Math.cos(y/100));
 	//var R = Math.floor(Math.sin(x/100)*256)^Math.floor(256*Math.cos(y/100))^Math.floor(2*Math.sin(x/100)*256)^Math.floor(2*256*Math.cos(y/100));
 	//var R = Math.floor((x/400)**2*256)^Math.floor(256*(y/400)**2);
@@ -44,9 +36,8 @@ window.onload = function() {
 	//var R = (x&y)*Math.sin(t/30)+(x|y)*Math.cos(t/30);
 	//var R = (x+y)*Math.sin(t/30)+(x&y)*Math.cos(t/30)*.866-(x|y)*Math.cos(t/30)*.866;
 	//var R = (x^y)*Math.sin(t/30)+(x+y)*Math.cos(t/30)*.866-(x-y)*Math.cos(t/30)*.866;
-	var R = (x&y)*Math.cos(x/10)+(x|y)*Math.cos(y/10);
-	// Rotate the colors
-    R=(R+t*5)%256;
+	//var R = (x&y)*Math.cos(x/10)+(x|y)*Math.cos(y/10);
+	R=(R+t*5)%256;
     // Set the pixel data
     imagedata.data[pixelindex] = R;     // Red
     imagedata.data[pixelindex+1] = R; // Green
@@ -55,17 +46,11 @@ window.onload = function() {
    }
   }
  }
- // Main loop
  function main(t) {
-  // Request animation frames
   window.requestAnimationFrame(main);
-  // Create the image
-  //createImage(Math.floor( 100* (1+Math.sin(t/1024/3.141592654))));
   createImage(t);
-  // Draw the image data to the canvas
   context.putImageData(imagedata, 0, 0);
  }
-// Call the main loop
 main(0);
 };
 </script> 
